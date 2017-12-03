@@ -2,29 +2,8 @@
 
 """
 A dummy program to get started with DnD character generation, leveling up, and PDF printout.
-An AtCon production
-ConWel? WelCon?
-TimJam? JamCon?
-Or perhaps an Anagram of our names?
-https://new.wordsmith.org/anagram/anagram.cgi?anagram=atwell+connolly&language=english&t=500&d=&include=&exclude=&n=&m=&a=n&l=n&q=n&k=1
-Frex (Tim and Jamie):
-Time I Jam
-I Emit Jam
-
-Or (Atwell Connolly)
-Alloy Clown Lent
-Tall Nonce Lowly
-Newly Tall Colon
-
-Or (Cyclohexane and Fezik):
-Chalice Key Zen Fox
-Cafe Zilch Key Oxen
-Zen Fecal Hickey Ox
-
-11/18/17
-
+A Mint Jam Idea production.
 12/2/17
-Mint Jam Idea it is!  It's an anagram of Tim and Jamie.
 """
 
 # a dumb pun function
