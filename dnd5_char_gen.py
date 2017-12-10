@@ -1,5 +1,7 @@
 #! /usr/bin/python
 
+import sys, os, csv
+
 """
 A program to get started with DnD character generation, leveling up, and PDF printout.
 A Mint Jam Idea production.
@@ -36,8 +38,8 @@ class Character(object):
 
     def __init__(self, name):
         #initialize a character.
-        #self.name = name
-        pass
+        self.name = name
+        
 
     def __str__(self):
         #string representation of an object, for printing
@@ -60,6 +62,17 @@ def parse_csv(stats):
     return d_stats
 
 def main():
+    
+    char = Character(raw_input("Enter character name: "))
+    char.d_description['age'] = raw_input("Enter character age: ")
+    charFile = open('charfile.csv', 'w')
+    charFile.write("name|" + char.name + ",")
+    statsFile = open('stats.csv')
+    statsReader = csv.reader(statsFile)
+    statsData = list(statsReader)
+    print statsData
+    '''
+    #obtain stat bonus from stats.csv file
     filename = 'stats.csv'
     stats = read_file(filename)
     d_stats = parse_csv(stats)
@@ -68,7 +81,7 @@ def main():
     stat = stat.lstrip()
     # remove the \n character stored with the 20 from the file.
     print d_stats[stat].rstrip()
-
+    '''
 
 
     '''
@@ -82,9 +95,12 @@ def main():
         for key, value in d_char.iteritems():
             print "Name: ", key, value
     '''
-try:
-    if __name__ == "__main__":
+if __name__ == "__main__":
+    try:
         main()
-except KeyboardInterrupt:  # try to ensure a clean exit
-    pass
-
+    except KeyboardInterrupt:  # try to ensure a clean exit
+        print "Interrupted"
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
