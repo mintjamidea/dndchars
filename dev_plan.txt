@@ -1,0 +1,39 @@
+12/5/17
+
+Development Plan
+
+====> Phase 1 <====
+- Commandline
+- CSV for static data storage
+- CSV for character data storage
+- Ability to:
+ - Build a character
+ - Level a character
+ - Edit a character
+ - Store and recall a character
+ - Use Github for code sharing
+ - Python 2
+ - Basic DnD classes from the PHB only (no archetypes, no prestige classes)
+
+
+====> Phase 2 <====
+ - Add Magic Items (those in the group only)
+ - Add MW items (those in the group only)
+ - Add spells and spellcasting
+ - Add Spell Points
+ - Add Archetypes to classes
+
+
+====> Phase 3 <====
+ - GUI (web or client) interface for entering character data
+ - PDF generation of character for printing (matches the 5e template at WOTC)
+ - Use Pyinstaller to roll it all up into one executable binary
+ - Character data stored in a database (SQLite or MySQL?)
+ - Static data stored in a database
+
+
+====> Phase 4 <====
+ - Encumberance
+ - Spell Slots
+ - Convert Python 2 to Python 3.
+ - Anything else we want to add
