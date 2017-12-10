@@ -36,10 +36,10 @@ class Character(object):
     d_weapons = {}
     spell_points = ''
 
-    def __init__(self, name):
+    def __init__(self):
         #initialize a character.
-        self.name = name
-        
+        #self.name = name
+        pass
 
     def __str__(self):
         #string representation of an object, for printing
@@ -62,15 +62,17 @@ def parse_csv(stats):
     return d_stats
 
 def main():
-    
-    char = Character(raw_input("Enter character name: "))
+    #get character data from user (break out into own function?)
+    #this will include all data which are given by user, not calculated
+    char = Character()
+    char.name = raw_input("Enter character name: ")
     char.d_description['age'] = raw_input("Enter character age: ")
-    charFile = open('charfile.csv', 'w')
-    charFile.write("name|" + char.name + ",")
-    statsFile = open('stats.csv')
-    statsReader = csv.reader(statsFile)
-    statsData = list(statsReader)
-    print statsData
+    #use csv module to build character data csv (break out into own function?)
+    with open('char.csv', 'w') as csvfile:
+        fieldnames = ['name', 'age']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow({'name': char.name, 'age': char.d_description})
     '''
     #obtain stat bonus from stats.csv file
     filename = 'stats.csv'
