@@ -1,18 +1,18 @@
-12/5/17
+12/5/17 - created.
 
 Development Plan
 
 ====> Phase 1 <====
 - Commandline
-- CSV for static data storage
-- CSV for character data storage
+. - CSV for static data storage
+x - CSV for character data storage (serialize the object instead using Pickle!)
 - Ability to:
- - Build a character
- - Level a character
- - Edit a character
- - Store and recall a character
- - Use Github for code sharing
- - Python 2
+ . - Build a character
+ . - Level a character
+ . - Edit a character
+ . - Store and recall a character
+ v - Use Github for code sharing
+ v - Python 2
  - Basic DnD classes from the PHB only (no archetypes, no prestige classes)
 
 
@@ -36,4 +36,12 @@ Development Plan
  - Encumberance
  - Spell Slots
  - Convert Python 2 to Python 3.
+ - Add remaining Magic Items
+ - Add remaining MW items
  - Anything else we want to add
+
+
+ === KEY ===
+ . = In progress
+ v = Completed
+ x = Deleted
