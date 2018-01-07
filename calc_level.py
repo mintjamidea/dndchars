@@ -24,10 +24,13 @@ def check_level():
     pass
 
 def main():
+    calculate(x)
+    
+def calculate(char_exp):    
     filename = 'exp_thresholds.csv'
     exp = read_file(filename)
     d_exp = parse_csv(exp)
-    answer_xp = int(raw_input('How much xp do you have? '))
+    answer_xp = char_exp
     keys = []
     for key, value in d_exp.iteritems():
         keys.append(int(key))
@@ -38,6 +41,7 @@ def main():
             continue
         else:
             print "Your level is:", d_exp[str(keys[keys.index(cur_xp)-1])]
+            return d_exp[str(keys[keys.index(cur_xp)-1])]
             break
 
 try:
