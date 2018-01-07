@@ -4,8 +4,9 @@
  . = In progress
  v = Completed
  x = Deleted
+=======
 
-Development Plan
+> Development Plan <
 
 ====> Phase 1 <====
 - Commandline
