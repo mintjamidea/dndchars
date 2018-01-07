@@ -1,3 +1,8 @@
 1/1/18
 Tim is currently recovering from the flu and has to work tomorrow...so has done
 dick-all with the code, sorry!
+
+1/6/18
+Worked on dnd5_char_gen.py:
+ - Removed all dictionaries from the character class (desc, saves, skills, wealth)
+ - Put in a calculation for Passive Perception

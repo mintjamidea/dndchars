@@ -1,5 +1,10 @@
 12/5/17 - created.
 
+ === KEY ===
+ . = In progress
+ v = Completed
+ x = Deleted
+
 Development Plan
 
 ====> Phase 1 <====
@@ -39,9 +44,3 @@ x - CSV for character data storage (serialize the object instead using Pickle!)
  - Add remaining Magic Items
  - Add remaining MW items
  - Anything else we want to add
-
-
- === KEY ===
- . = In progress
- v = Completed
- x = Deleted
