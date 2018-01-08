@@ -28,7 +28,7 @@ class Character(object):
 
     strength = 0
     dexterity = 0
-    constition = 0
+    constitution = 0
     intelligence = 0
     wisdom = 0
     charisma = 0           
@@ -118,9 +118,24 @@ def generate_stats():
     return stat_list
 
 def build_character():
+
+    def assign_stats(pool):
+        #takes a pool of 6 ability scores, asks user to assign each to an ability
+        abilities = ["strength", "dexterity", "constitution", "intelligence", \
+                     "wisdom", "charisma"]
+        ordered_stats = []
+        for ability in abilities:
+            print "Available scores are: ", pool
+            print "Assign one score to", ability, ":"
+            selected_score = int(raw_input(">>"))
+            while selected_score not in pool:
+                print "Please choose a score from the list"
+                selected_score = int(raw_input(">>"))
+            ordered_stats.append(selected_score)
+            pool.remove(selected_score)
+        return ordered_stats
     #get character data from user
     #this will include all data which are given by user, not calculated
-    
     char = Character()
     char.name = raw_input("Enter character name: ")
     char.age = raw_input("Enter age: ")
@@ -138,7 +153,18 @@ def build_character():
     char.inspiration = int(raw_input("Enter current inspiration amount: "))
     char.level = calculate(char.exp)
     char.prof_bonus = obtain_stat_bonus('prof_bonus.csv', char.level)
-    
+
+    print "Let's assign the characters's ability scores"
+    print "6 ability scores have been randomly generated.  They are:"
+    ability_score_pool = generate_stats() #generate pool of 6 scores to assign
+    ability_score_list = assign_stats(ability_score_pool) #assign those scores
+    char.strength = ability_score_list[0]
+    char.dexterity = ability_score_list[1]
+    char.constitution = ability_score_list[2]
+    char.intelligence = ability_score_list[3]
+    char.wisdom = ability_score_list[4]
+    char.charisma = ability_score_list[5]
+            
     #save character data via pickling
     request_save = raw_input("save character?(y/n) ")
     if request_save == 'y':
@@ -190,7 +216,8 @@ def main():
         print char.name, char.age, char.height, char.weight, char.eyes, \
         char.skin, char.hair, char.player_name, char.char_class, \
         char.background, char.alignment, char.exp, char.inspiration, \
-        char.level, char.prof_bonus
+        char.level, char.prof_bonus, char.strength, char.dexterity, \
+        char.constitution, char.intelligence, char.wisdom, char.charisma
         
 
 
