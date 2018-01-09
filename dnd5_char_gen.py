@@ -242,8 +242,6 @@ with open(char_file_name, 'w') as csvfile:
 
     
 def main():
-    use_pregen_stats()
-    '''
     if raw_input("Are you building a new character? (y/n) ") == 'y':
         build_character()
     else:
@@ -257,7 +255,7 @@ def main():
         char.level, char.prof_bonus, char.strength, char.dexterity, \
         char.constitution, char.intelligence, char.wisdom, char.charisma
         
-    '''
+
 
     '''
     #obtain stat bonus from stats.csv file
