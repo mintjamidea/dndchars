@@ -61,7 +61,7 @@ class Character(object):
     skill_stealth = 0
     skill_survival = 0
 
-    passive_perception = 10 + skill_perception
+    passive_perception = 0
     armor_class = 0
     initiative = 0
     speed = 0
@@ -91,6 +91,9 @@ class Character(object):
     def add_name(self, name):
         #add name to current character
         self.name = name
+
+    def set_passive_perception(self):
+        self.passive_perception = self.skill_perception + 10
 
 def read_file(filename):
     fhandle = open(filename, 'r')
@@ -130,7 +133,7 @@ def build_character():
     char.skin = raw_input("Enter skin color: ")
     char.hair = raw_input("Enter hair color: ")
     char.player_name = raw_input("Enter player name: ")
-    char.char_class = raw_input("Enter player class: ")
+    char.char_class = raw_input("Enter character class: ")
     char.background = raw_input("Enter character background: ")
     #maybe change alignment to menu, where choices are restricted based on class
     char.alignment = raw_input("Enter character alignment: ")
@@ -179,7 +182,6 @@ with open(char_file_name, 'w') as csvfile:
 
     
 def main():
-
     if raw_input("Are you building a new character? (y/n) ") == 'y':
         build_character()
     else:
@@ -191,6 +193,7 @@ def main():
         char.skin, char.hair, char.player_name, char.char_class, \
         char.background, char.alignment, char.exp, char.inspiration, \
         char.level, char.prof_bonus
+    
         
 
 
@@ -226,4 +229,4 @@ if __name__ == "__main__":
         try:
             sys.exit(0)
         except SystemExit:
-os._exit(0)
+            os._exit(0)
