@@ -180,7 +180,10 @@ def build_character():
     
     #get and apply racial modifiers to ability scores
     racial_ability_score_modifiers = get_racial_modifiers(char.char_race.lower())
-    print racial_ability_score_modifiers
+    for ability in racial_ability_score_modifiers:
+        current_score = getattr(char, ability)
+        setattr(char, ability, current_score + int(racial_ability_score_modifiers[ability]))
+    
             
     #save character data via pickling
     request_save = raw_input("save character?(y/n) ")
