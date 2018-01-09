@@ -6,3 +6,7 @@ dick-all with the code, sorry!
 Worked on dnd5_char_gen.py:
  - Removed all dictionaries from the character class (desc, saves, skills, wealth)
  - Put in a calculation for Passive Perception
+
+1/8/18
+Worked on dnd5_char_gen.py:
+ - Added method to the Character Class to calculate passive perception.
