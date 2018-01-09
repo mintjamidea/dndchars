@@ -130,7 +130,8 @@ def use_pregen_stats():
         reader = csv.reader(fhandle)
         pregen_stats = list(reader) # why the fork does this produce a list inside a list?
         for stats in pregen_stats: # unwind the list within the list into just one list..sheesh.
-            pregen_stats = stats    
+            pregen_stats = stats
+        pregen_stats = map(int, pregen_stats) # convert strings to ints in the list.
     return pregen_stats
 
 def assign_stats(pool):
@@ -178,7 +179,7 @@ def build_character():
     char.level = calculate(char.exp)
     char.prof_bonus = obtain_stat_bonus('prof_bonus.csv', char.level)
     print "Let's assign the characters's ability scores"
-    how_stats = raw_input("How would you like to generate your stats, random or pregen?")
+    how_stats = raw_input("How would you like to generate your stats, random or pregen? ")
     if how_stats == 'random':
         print "6 ability scores have been randomly generated.  They are:"
         ability_score_pool = generate_stats() #generate pool of 6 scores to assign
