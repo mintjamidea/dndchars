@@ -10,3 +10,4 @@ Worked on dnd5_char_gen.py:
 1/8/18
 Worked on dnd5_char_gen.py:
  - Added method to the Character Class to calculate passive perception.
+ - Added function to use pregen stats from CSV and then prompted user for choice of whether to use random gen or pregen for stats.
