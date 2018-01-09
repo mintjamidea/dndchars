@@ -125,6 +125,14 @@ def generate_stats():
         stat_list.append(sum(dice))
     return stat_list
 
+def use_pregen_stats():
+    with open ('starting_stats.csv', 'rb') as fhandle:
+        reader = csv.reader(fhandle)
+        pregen_stats = list(reader) # why the fork does this produce a list inside a list?
+        for stats in pregen_stats: # unwind the list within the list into just one list..sheesh.
+            pregen_stats = stats    
+    return pregen_stats
+
 def assign_stats(pool):
     #takes a pool of 6 ability scores, asks user to assign each to an ability
     ordered_stats = []
@@ -169,10 +177,14 @@ def build_character():
     char.inspiration = int(raw_input("Enter current inspiration amount: "))
     char.level = calculate(char.exp)
     char.prof_bonus = obtain_stat_bonus('prof_bonus.csv', char.level)
-
     print "Let's assign the characters's ability scores"
-    print "6 ability scores have been randomly generated.  They are:"
-    ability_score_pool = generate_stats() #generate pool of 6 scores to assign
+    how_stats = raw_input("How would you like to generate your stats, random or pregen?")
+    if how_stats == 'random':
+        print "6 ability scores have been randomly generated.  They are:"
+        ability_score_pool = generate_stats() #generate pool of 6 scores to assign
+    else:
+        print "We'll use the pregen values of: 15, 14, 13, 12, 10, 8"
+        ability_score_pool = use_pregen_stats()
     ability_score_list = assign_stats(ability_score_pool) #assign those scores
     char.strength = ability_score_list[0]
     char.dexterity = ability_score_list[1]
@@ -230,6 +242,8 @@ with open(char_file_name, 'w') as csvfile:
 
     
 def main():
+    use_pregen_stats()
+    '''
     if raw_input("Are you building a new character? (y/n) ") == 'y':
         build_character()
     else:
@@ -243,7 +257,7 @@ def main():
         char.level, char.prof_bonus, char.strength, char.dexterity, \
         char.constitution, char.intelligence, char.wisdom, char.charisma
         
-
+    '''
 
     '''
     #obtain stat bonus from stats.csv file
