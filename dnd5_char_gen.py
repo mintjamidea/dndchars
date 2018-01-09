@@ -9,6 +9,10 @@ A program to get started with DnD character generation, leveling up, and PDF pri
 A Mint Jam Idea production.
 12/7/17
 """
+
+abilities = ["strength", "dexterity", "constitution", "intelligence", \
+             "wisdom", "charisma"]
+
 class Character(object):
     # class to represent a character
 
@@ -20,6 +24,7 @@ class Character(object):
     skin = ''
     hair = ''
     player_name = ''
+    char_race = ''
     char_class = ''
     level = ''
     background = ''
@@ -117,23 +122,30 @@ def generate_stats():
         stat_list.append(sum(dice))
     return stat_list
 
+def assign_stats(pool):
+    #takes a pool of 6 ability scores, asks user to assign each to an ability
+    ordered_stats = []
+    for ability in abilities:
+        print "Available scores are: ", pool
+        print "Assign one score to", ability, ":"
+        selected_score = int(raw_input(">>"))
+        while selected_score not in pool:
+            print "Please choose a score from the list"
+            selected_score = int(raw_input(">>"))
+        ordered_stats.append(selected_score)
+        pool.remove(selected_score)
+    return ordered_stats
+
+def get_racial_modifiers(race):
+    filename = "race_" + race + "_traits.csv"
+    stat_bonuses = {}
+    for ability in abilities:
+        stat_bonuses[ability] = obtain_stat_bonus(filename, ability)
+    return stat_bonuses
+    
+
 def build_character():
 
-    def assign_stats(pool):
-        #takes a pool of 6 ability scores, asks user to assign each to an ability
-        abilities = ["strength", "dexterity", "constitution", "intelligence", \
-                     "wisdom", "charisma"]
-        ordered_stats = []
-        for ability in abilities:
-            print "Available scores are: ", pool
-            print "Assign one score to", ability, ":"
-            selected_score = int(raw_input(">>"))
-            while selected_score not in pool:
-                print "Please choose a score from the list"
-                selected_score = int(raw_input(">>"))
-            ordered_stats.append(selected_score)
-            pool.remove(selected_score)
-        return ordered_stats
     #get character data from user
     #this will include all data which are given by user, not calculated
     char = Character()
@@ -146,6 +158,7 @@ def build_character():
     char.hair = raw_input("Enter hair color: ")
     char.player_name = raw_input("Enter player name: ")
     char.char_class = raw_input("Enter player class: ")
+    char.char_race = raw_input("Enter player race: ")
     char.background = raw_input("Enter character background: ")
     #maybe change alignment to menu, where choices are restricted based on class
     char.alignment = raw_input("Enter character alignment: ")
@@ -164,6 +177,10 @@ def build_character():
     char.intelligence = ability_score_list[3]
     char.wisdom = ability_score_list[4]
     char.charisma = ability_score_list[5]
+    
+    #get and apply racial modifiers to ability scores
+    racial_ability_score_modifiers = get_racial_modifiers(char.char_race.lower())
+    print racial_ability_score_modifiers
             
     #save character data via pickling
     request_save = raw_input("save character?(y/n) ")
@@ -184,8 +201,12 @@ def obtain_stat_bonus(csvfile, stat):
     filename = csvfile
     stats = read_file(filename)
     d_stats = parse_csv(stats)
-    print "stat bonus: ", d_stats[stat]
-    return d_stats[stat]
+    if stat in d_stats:
+        print "stat bonus: ", d_stats[stat]
+        return d_stats[stat]
+    else:
+        return 0
+    
     
 '''
 use csv module to build character data csv (break out into own function?)
@@ -200,8 +221,6 @@ with open(char_file_name, 'w') as csvfile:
     writer.writerow({'name': char.name, 'description': char.d_description,  
                      'player_name': char.player_name, 'class': char.char_class})
 '''
-#if player chooses to roll random stats:
-#generate_stats()
 
     
 def main():
