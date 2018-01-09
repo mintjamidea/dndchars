@@ -160,8 +160,8 @@ def build_character():
     char.skin = raw_input("Enter skin color: ")
     char.hair = raw_input("Enter hair color: ")
     char.player_name = raw_input("Enter player name: ")
-    char.char_class = raw_input("Enter player class: ")
-    char.char_race = raw_input("Enter player race: ")
+    char.char_class = raw_input("Enter character class: ")
+    char.char_race = raw_input("Enter character race: ")
     char.background = raw_input("Enter character background: ")
     #maybe change alignment to menu, where choices are restricted based on class
     char.alignment = raw_input("Enter character alignment: ")
