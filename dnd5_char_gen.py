@@ -66,7 +66,7 @@ class Character(object):
     skill_stealth = 0
     skill_survival = 0
 
-    passive_perception = 10 + skill_perception
+    passive_perception = 0
     armor_class = 0
     initiative = 0
     speed = 0
@@ -97,6 +97,9 @@ class Character(object):
         #add name to current character
         self.name = name
 
+    def set_passive_perception(self):
+        self.passive_perception = self.skill_perception + 10
+
 def read_file(filename):
     fhandle = open(filename, 'r')
     for line in fhandle:
@@ -121,6 +124,15 @@ def generate_stats():
         del dice[0]
         stat_list.append(sum(dice))
     return stat_list
+
+def use_pregen_stats():
+    with open ('starting_stats.csv', 'rb') as fhandle:
+        reader = csv.reader(fhandle)
+        pregen_stats = list(reader) # why the fork does this produce a list inside a list?
+        for stats in pregen_stats: # unwind the list within the list into just one list..sheesh.
+            pregen_stats = stats
+        pregen_stats = map(int, pregen_stats) # convert strings to ints in the list.
+    return pregen_stats
 
 def assign_stats(pool):
     #takes a pool of 6 ability scores, asks user to assign each to an ability
@@ -157,8 +169,8 @@ def build_character():
     char.skin = raw_input("Enter skin color: ")
     char.hair = raw_input("Enter hair color: ")
     char.player_name = raw_input("Enter player name: ")
-    char.char_class = raw_input("Enter player class: ")
-    char.char_race = raw_input("Enter player race: ")
+    char.char_class = raw_input("Enter character class: ")
+    char.char_race = raw_input("Enter character race: ")
     char.background = raw_input("Enter character background: ")
     #maybe change alignment to menu, where choices are restricted based on class
     char.alignment = raw_input("Enter character alignment: ")
@@ -166,10 +178,14 @@ def build_character():
     char.inspiration = int(raw_input("Enter current inspiration amount: "))
     char.level = calculate(char.exp)
     char.prof_bonus = obtain_stat_bonus('prof_bonus.csv', char.level)
-
     print "Let's assign the characters's ability scores"
-    print "6 ability scores have been randomly generated.  They are:"
-    ability_score_pool = generate_stats() #generate pool of 6 scores to assign
+    how_stats = raw_input("How would you like to generate your stats, random or pregen? ")
+    if how_stats == 'random':
+        print "6 ability scores have been randomly generated.  They are:"
+        ability_score_pool = generate_stats() #generate pool of 6 scores to assign
+    else:
+        print "We'll use the pregen values of: 15, 14, 13, 12, 10, 8"
+        ability_score_pool = use_pregen_stats()
     ability_score_list = assign_stats(ability_score_pool) #assign those scores
     char.strength = ability_score_list[0]
     char.dexterity = ability_score_list[1]
@@ -227,7 +243,6 @@ with open(char_file_name, 'w') as csvfile:
 
     
 def main():
-
     if raw_input("Are you building a new character? (y/n) ") == 'y':
         build_character()
     else:
