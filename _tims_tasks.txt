@@ -11,3 +11,8 @@ Worked on dnd5_char_gen.py:
 Worked on dnd5_char_gen.py:
  - Added method to the Character Class to calculate passive perception.
  - Added function to use pregen stats from CSV and then prompted user for choice of whether to use random gen or pregen for stats.
+
+ 2/13/18
+ Worked on dnd5_char_gen.py:
+  - added method to update inititiative value based on bonus from self.dexterity.
+  - Needs work.  What about other ways to update initiative?  We need a generic method that can update init.
