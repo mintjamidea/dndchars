@@ -100,6 +100,9 @@ class Character(object):
     def set_passive_perception(self):
         self.passive_perception = self.skill_perception + 10
 
+    def set_initiative(self):
+        self.initiative = obtain_stat_bonus("stat_bonuses.csv", self.dexterity)
+
 def read_file(filename):
     fhandle = open(filename, 'r')
     for line in fhandle:
@@ -225,8 +228,8 @@ def obtain_stat_bonus(csvfile, stat):
         return d_stats[stat]
     else:
         return 0
-    
-    
+       
+
 '''
 use csv module to build character data csv (break out into own function?)
 keep all on one row in CSV or use multiple rows?
